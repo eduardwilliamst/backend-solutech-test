@@ -24,6 +24,10 @@ export function findProductById(id: string, db: DbClient = prisma) {
   return db.product.findFirst({ where: { id, isDeleted: false } });
 }
 
+export function findProductsByIds(ids: string[], db: DbClient = prisma) {
+  return db.product.findMany({ where: { id: { in: ids }, isDeleted: false } });
+}
+
 export function createProduct(data: Prisma.ProductCreateInput) {
   return prisma.product.create({ data });
 }
